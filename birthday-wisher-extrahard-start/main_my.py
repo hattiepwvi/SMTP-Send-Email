@@ -23,7 +23,7 @@ for index, row in data.iterrows():
         email = row["email"]
 
 # 3. If step 2 is true, pick a random letter from letter templates and replace the [NAME] with the person's actual name from birthdays.csv
-folder_path = "letter_templates"  # 替换为你的文件夹路径
+folder_path = "letter_templates"
 txt_files = [file for file in os.listdir(folder_path) if file.endswith(".txt")]
 random_file = random.choice(txt_files)
 with open(f"letter_templates/{random_file}") as file:
@@ -35,9 +35,8 @@ with open(f"letter_templates/{random_file}") as file:
 with smtplib.SMTP("smtp.gmail.com") as connection:
     connection.starttls()
     connection.login(user=my_email, password=password)
-    connection.sendmail(from_addr=my_email, to_addrs=email, msg=f"Subject: Happy birthday\n\n{new_content}")
-
-
-
-
-
+    connection.sendmail(
+        from_addr=my_email,
+        to_addrs=email,
+        msg=f"Subject: Happy birthday\n\n{new_content}",
+    )
